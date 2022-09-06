@@ -1,0 +1,4 @@
+[submodule "doc-U_RHEL_8_V1R7_STIG"]
+	path = doc-U_RHEL_8_V1R7_STIG
+	url = ./
+	branch = doc-U_RHEL_8_V1R7_STIG
