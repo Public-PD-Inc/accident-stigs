@@ -87,6 +87,15 @@ fi
 # main logic
 #
 
+export ACCIDENT_STIG_IMPL_BASH_LIB_DIR="$libdir"
+export ACCIDENT_STIG_IMPL_BASH_ETC_DIR="$bindir/../etc"
+
+source "$ACCIDENT_STIG_IMPL_BASH_LIB_DIR/accident-stig-default-settings.bash"
+
+if [ -e "$ACCIDENT_STIG_IMPL_BASH_ETC_DIR/accident-stig-settings.bash" ]; then
+source "$ACCIDENT_STIG_IMPL_BASH_ETC_DIR/accident-stig-settings.bash"
+fi
+
 # create stig-impl status directory
 runfs="$(awk '($2=="/run"){print $3}' /proc/mounts)"
 if [ "$runfs" != "tmpfs" ]; then
@@ -108,8 +117,6 @@ else
 		rule_dir_list+="$rulesdir/$rule_dir_name"
 	done
 fi
-
-export ACCIDENT_STIG_IMPL_BASH_LIB_DIR="$libdir"
 
 # iterate over each rule directory
 for dir in "${rule_dir_list[@]}"; do
