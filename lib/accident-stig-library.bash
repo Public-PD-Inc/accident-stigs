@@ -126,8 +126,7 @@ compliance()
 				shift 1
 				;;
 			*)
-				echo "$0: unknown option: $1" >&2
-				exit 1
+				error "$0: unknown option: $1"
 				;;
 		esac
 	done
