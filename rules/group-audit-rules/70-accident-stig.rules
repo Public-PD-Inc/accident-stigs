@@ -1,0 +1,249 @@
+# accident-stig.rules
+
+
+# SV-230386r627750_rule
+
+-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k execpriv
+-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k execpriv
+
+-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k execpriv
+-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k execpriv
+
+
+# SV-230402r627750_rule
+
+-e 2
+
+
+# SV-230403r627750_rule
+
+--loginuid-immutable
+
+
+# SV-230404r627750_rule
+
+-w /etc/shadow -p wa -k identity
+
+
+# SV-230405r627750_rule
+
+-w /etc/security/opasswd -p wa -k identity
+
+
+# SV-230406r627750_rule
+
+-w /etc/passwd -p wa -k identity
+
+
+# SV-230407r627750_rule
+
+-w /etc/gshadow -p wa -k identity
+
+
+# SV-230408r627750_rule
+
+-w /etc/group -p wa -k identity
+
+
+# SV-230409r627750_rule
+
+-w /etc/sudoers -p wa -k identity
+
+
+# SV-230410r627750_rule
+
+-w /etc/sudoers.d/ -p wa -k identity
+
+
+# SV-230412r627750_rule
+
+-a always,exit -F path=/usr/bin/su -F perm=x -F auid>=1000 -F auid!=unset -k privileged-priv_change
+
+
+# SV-230413r810463_rule
+
+-a always,exit -F arch=b32 -S setxattr,fsetxattr,lsetxattr,removexattr,fremovexattr,lremovexattr -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S setxattr,fsetxattr,lsetxattr,removexattr,fremovexattr,lremovexattr -F auid>=1000 -F auid!=unset -k perm_mod
+
+-a always,exit -F arch=b32 -S setxattr,fsetxattr,lsetxattr,removexattr,fremovexattr,lremovexattr -F auid=0 -k perm_mod
+-a always,exit -F arch=b64 -S setxattr,fsetxattr,lsetxattr,removexattr,fremovexattr,lremovexattr -F auid=0 -k perm_mod
+
+
+# SV-230418r627750_rule
+
+-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=unset -k privileged-chage
+
+
+# SV-230419r627750_rule
+
+-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=unset -k perm_mod
+
+
+# SV-230421r627750_rule
+
+-a always,exit -F path=/usr/bin/ssh-agent -F perm=x -F auid>=1000 -F auid!=unset -k privileged-ssh
+
+
+# SV-230422r627750_rule
+
+-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=unset -k privileged-passwd
+
+
+# SV-230423r627750_rule
+
+-a always,exit -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset -k privileged-mount
+
+
+# SV-230424r627750_rule
+
+-a always,exit -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=unset -k privileged-mount
+
+
+# SV-230425r627750_rule
+
+-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=unset -k privileged-mount
+-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=unset -k privileged-mount
+
+
+# SV-230426r627750_rule
+
+-a always,exit -F path=/usr/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230427r627750_rule
+
+-a always,exit -F path=/usr/sbin/postdrop -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230428r627750_rule
+
+-a always,exit -F path=/usr/sbin/postqueue -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230429r627750_rule
+
+-a always,exit -F path=/usr/sbin/semanage -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230430r627750_rule
+
+-a always,exit -F path=/usr/sbin/setfiles -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230431r627750_rule
+
+-a always,exit -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230432r627750_rule
+
+-a always,exit -F path=/usr/sbin/setsebool -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230433r627750_rule
+
+-a always,exit -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=unset -k privileged-unix-update
+
+
+# SV-230434r744002_rule
+
+-a always,exit -F path=/usr/libexec/openssh/ssh-keysign -F perm=x -F auid>=1000 -F auid!=unset -k privileged-ssh
+
+
+# SV-230435r627750_rule
+
+-a always,exit -F path=/usr/bin/setfacl -F perm=x -F auid>=1000 -F auid!=unset -k perm_mod
+
+
+# SV-230436r627750_rule
+
+-a always,exit -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=1000 -F auid!=unset -k privileged-pam_timestamp_check
+
+
+# SV-230437r627750_rule
+
+-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=unset -k priv_cmd
+
+
+# SV-230438r810464_rule
+
+-a always,exit -F arch=b32 -S init_module,finit_module -F auid>=1000 -F auid!=unset -k module_chng
+-a always,exit -F arch=b64 -S init_module,finit_module -F auid>=1000 -F auid!=unset -k module_chng
+
+
+# SV-230439r810465_rule
+
+-a always,exit -F arch=b32 -S rename,unlink,rmdir,renameat,unlinkat -F auid>=1000 -F auid!=unset -k delete
+-a always,exit -F arch=b64 -S rename,unlink,rmdir,renameat,unlinkat -F auid>=1000 -F auid!=unset -k delete
+
+
+# SV-230444r627750_rule
+
+-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=unset -k privileged-gpasswd
+
+
+# SV-230446r627750_rule
+
+-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng
+-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng
+
+
+# SV-230447r627750_rule
+
+-a always,exit -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=unset -k privileged-crontab
+
+
+# SV-230448r627750_rule
+
+-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=unset -k priv_cmd
+
+
+# SV-230449r810455_rule
+
+-a always,exit -F arch=b32 -S truncate,ftruncate,creat,open,openat,open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S truncate,ftruncate,creat,open,openat,open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -k perm_access
+
+-a always,exit -F arch=b32 -S truncate,ftruncate,creat,open,openat,open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+-a always,exit -F arch=b64 -S truncate,ftruncate,creat,open,openat,open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -k perm_access
+
+
+# SV-230455r810459_rule
+
+-a always,exit -F arch=b32 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=unset -k perm_mod
+
+
+# SV-230456r810462_rule
+
+-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=unset -k perm_mod
+-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat -F auid>=1000 -F auid!=unset -k perm_mod
+
+
+# SV-230462r627750_rule
+
+-a always,exit -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=unset -k priv_cmd
+
+
+# SV-230463r627750_rule
+
+-a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=unset -k privileged-usermod
+
+
+# SV-230464r627750_rule
+
+-a always,exit -F path=/usr/bin/chacl -F perm=x -F auid>=1000 -F auid!=unset -k perm_mod
+
+
+# SV-230465r627750_rule
+
+-a always,exit -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=unset -k modules
+
+
+# SV-230466r627750_rule
+
+-w /var/log/faillock -p wa -k logins
+
+
+# SV-230467r627750_rule
+
+-w /var/log/lastlog -p wa -k logins
